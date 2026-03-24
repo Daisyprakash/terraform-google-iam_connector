@@ -15,7 +15,7 @@
  */
 
 resource "google_iam_connectors_connector" "default" {
-  provider = google-beta
+  provider = google-nightly
 
   project        = var.project_id
   location       = var.location
