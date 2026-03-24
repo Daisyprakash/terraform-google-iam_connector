@@ -19,7 +19,12 @@ variable "project_id" {
   type        = string
 }
 
-variable "bucket_name" {
-  description = "The name of the bucket to create."
+variable "connector_id" {
+  description = "The name of the connector."
+  type        = string
+}
+
+variable "location" {
+  description = "The location in which connector to be created."
   type        = string
 }

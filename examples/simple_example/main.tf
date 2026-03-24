@@ -17,6 +17,7 @@
 module "iam_connector" {
   source = "../.."
 
-  project_id  = var.project_id
-  bucket_name = var.bucket_name
+  project_id   = var.project_id
+  connector_id = var.connector_id
+  location     = var.location
 }

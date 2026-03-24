@@ -73,13 +73,13 @@ variable "two_legged_oauth_params" {
     client_secret  = string
     token_endpoint = string
   })
-  default     = null
+  default = null
 }
 
 variable "ge_connector_params" {
   description = "Gemini Enterprise connector type parameters. Set to an empty object to enable."
   type        = any
-  default = null
+  default     = null
 }
 
 variable "state" {

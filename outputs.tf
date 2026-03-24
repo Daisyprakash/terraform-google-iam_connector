@@ -23,9 +23,3 @@ output "id" {
   description = "The ID of the created IAM connector."
   value       = google_iam_connectors_connector.default.id
 }
-
-output "name" {
-  description = "The name of the created IAM connector."
-  value       = google_iam_connectors_connector.default.name
-}
-

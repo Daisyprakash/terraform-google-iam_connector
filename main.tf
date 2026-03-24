@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+
+provider "google-nightly" {
+  project                        = var.project_id
+  region                         = var.location
+  iam_connectors_custom_endpoint = "https://staging-iamconnectors.sandbox.googleapis.com/v1alpha/"
+}
 resource "google_iam_connectors_connector" "default" {
   provider = google-nightly
 
@@ -24,7 +30,7 @@ resource "google_iam_connectors_connector" "default" {
   allowed_scopes = var.allowed_scopes
   blocked_scopes = var.blocked_scopes
   state          = var.state
-dynamic "connector_type_params" {
+  dynamic "connector_type_params" {
     for_each = var.api_key_params != null || var.three_legged_oauth_params != null || var.two_legged_oauth_params != null || var.ge_connector_params != null ? [1] : []
     content {
       dynamic "api_key" {
@@ -70,6 +76,10 @@ dynamic "connector_type_params" {
     precondition {
       condition     = var.connector_id != null
       error_message = "connector_id must be provided."
+    }
+    precondition {
+      condition     = var.api_key_params != null || var.three_legged_oauth_params != null || var.two_legged_oauth_params != null || var.ge_connector_params != null
+      error_message = "At least one of api_key_params, three_legged_oauth_params, two_legged_oauth_params, or ge_connector_params must be provided."
     }
   }
 }

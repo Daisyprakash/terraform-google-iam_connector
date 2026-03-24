@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-output "bucket_name" {
+output "id" {
   description = "The name of the bucket."
-  value       = module.iam_connector.bucket_name
+  value       = module.iam_connector.id
 }

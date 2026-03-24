@@ -16,7 +16,7 @@
 
 terraform {
   required_version = ">= 0.13"
-   required_providers {
+  required_providers {
     google-nightly = {
       source  = "hashicorp/google-nightly"
       version = "2026.3.23-0.0.3"
