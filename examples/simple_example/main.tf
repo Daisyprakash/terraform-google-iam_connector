@@ -17,7 +17,8 @@
 module "iam_connector" {
   source = "../.."
 
-  project_id   = var.project_id
-  connector_id = var.connector_id
-  location     = var.location
+  project_id          = var.project_id
+  connector_id        = var.connector_id
+  location            = "us-central1"
+  ge_connector_params = {}
 }

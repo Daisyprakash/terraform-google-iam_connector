@@ -69,8 +69,7 @@ Functional examples are included in the
 | Name | Description |
 |------|-------------|
 | connector | The created IAM connector. |
-| id | The ID of the created IAM connector. |
-| name | The name of the created IAM connector. |
+| connector\_id | The ID of the created IAM connector. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

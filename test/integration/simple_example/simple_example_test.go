@@ -12,28 +12,35 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package multiple_buckets
+package simple_example
 
 import (
 	"testing"
 
-	"github.com/GoogleCloudPlatform/cloud-foundation-toolkit/infra/blueprint-test/pkg/gcloud"
 	"github.com/GoogleCloudPlatform/cloud-foundation-toolkit/infra/blueprint-test/pkg/tft"
-	"github.com/GoogleCloudPlatform/cloud-foundation-toolkit/infra/blueprint-test/pkg/utils"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestSimpleExample(t *testing.T) {
-	example := tft.NewTFBlueprintTest(t)
+	example := tft.NewTFBlueprintTest(t,tft.WithTFDir("../../../examples/simple_example"))
 
 	example.DefineVerify(func(assert *assert.Assertions) {
 		example.DefaultVerify(assert)
 
-		projectID := example.GetStringOutput("project_id")
-		services := gcloud.Run(t, "services list", gcloud.WithCommonArgs([]string{"--project", projectID, "--format", "json"})).Array()
+		connectorID := example.GetStringOutput("id")
+    	assert.NotEmpty(connectorID, "Connector ID should not be empty")
+		
+		// skipping this part of the test of verifying the connector details through gcloud command since the API is not available in cft/developer-tools docker Image.
+		// projectID := example.GetStringOutput("project_id")
+		// location := "us-central1"
 
-		match := utils.GetFirstMatchResult(t, services, "config.name", "storage.googleapis.com")
-		assert.Equal("ENABLED", match.Get("state").String(), "storage service should be enabled")
+		// connectorOp := gcloud.Runf(t, "alpha iam-connectors describe %s --project %s --location %s", connectorID, projectID, location)
+
+		// expectedName := fmt.Sprintf("projects/%s/locations/%s/connectors/%s", projectID, location, connectorID)
+		// assert.Equal(expectedName, connectorOp.Get("name").String(), "IAM Connector full name should match")
+
+		// assert.Equal("ENABLED", connectorOp.Get("state").String(), "IAM Connector state should be ENABLED")
 	})
+
 	example.Test()
 }

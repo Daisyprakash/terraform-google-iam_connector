@@ -7,14 +7,15 @@ This example illustrates how to use the `iam_connector` module.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| bucket\_name | The name of the bucket to create. | `string` | n/a | yes |
+| connector\_id | Id of the connector | `string` | n/a | yes |
 | project\_id | The ID of the project in which to provision resources. | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| bucket\_name | The name of the bucket. |
+| id | The ID of the created IAM connector. |
+| project\_id | The project ID where the connector was created. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

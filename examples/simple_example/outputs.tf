@@ -14,7 +14,13 @@
  * limitations under the License.
  */
 
+output "project_id" {
+  description = "The project ID where the connector was created."
+  value       = var.project_id
+}
+
 output "id" {
-  description = "The name of the bucket."
+  description = "The ID of the created IAM connector."
   value       = module.iam_connector.id
 }
+

@@ -60,3 +60,7 @@ spec:
         two_legged_oauth_params:
           name: two_legged_oauth_params
           title: Two Legged Oauth Params
+    runtime:
+      outputs:
+        connector_id:
+          visibility: VISIBILITY_ROOT

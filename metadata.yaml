@@ -24,7 +24,7 @@ spec:
     source:
       repo: https://github.com/Daisyprakash/terraform-google-iam_connector.git
       sourceType: git
-    version: 0.0.4
+    version: 0.0.1
     actuationTool:
       flavor: Terraform
       version: ">= 0.13"
@@ -37,6 +37,15 @@ spec:
       description: Blueprint cost details
       url: https://cloud.google.com/products/calculator?id=02fb0c45-cc29-4567-8cc6-f72ac9024add
   content:
+    architecture:
+      diagramUrl: https://www.link-to-architecture-diagram.com
+      description:
+        - 1. Architecture description step no. 1
+        - 2. Architecture description step no. 2
+        - 3. Architecture description step no. N
+    documentation:
+      - title: Hosting a Static Website
+        url: https://cloud.google.com/storage/docs/hosting-static-website
     examples:
       - name: simple_example
         location: examples/simple_example
@@ -98,20 +107,21 @@ spec:
     outputs:
       - name: connector
         description: The created IAM connector.
-      - name: id
+      - name: connector_id
         description: The ID of the created IAM connector.
-      - name: name
-        description: The name of the created IAM connector.
   requirements:
     roles:
       - level: Project
         roles:
-          - roles/owner
+          - roles/connectors.admin
+          - roles/iam.serviceAccountUser
+          - roles/connector.credentialsUser
+          - roles/secretmanager.secretAccessor
+          - roles/iamconnectors.admin
     services:
-      - cloudresourcemanager.googleapis.com
-      - storage-api.googleapis.com
-      - serviceusage.googleapis.com
       - iamconnectors.googleapis.com
+      - iamconnectorcredentials.googleapis.com
+      - secretmanager.googleapis.com
     providerVersions:
       - source: hashicorp/google-nightly
         version: 2026.3.23-0.0.3

@@ -18,7 +18,7 @@
 # Make will use bash instead of sh
 SHELL := /usr/bin/env bash
 
-DOCKER_TAG_VERSION_DEVELOPER_TOOLS := 1
+DOCKER_TAG_VERSION_DEVELOPER_TOOLS := 1.26
 DOCKER_IMAGE_DEVELOPER_TOOLS := cft/developer-tools
 REGISTRY_URL := gcr.io/cloud-foundation-cicd
 
@@ -55,14 +55,16 @@ docker_test_cleanup:
 		$(REGISTRY_URL)/${DOCKER_IMAGE_DEVELOPER_TOOLS}:${DOCKER_TAG_VERSION_DEVELOPER_TOOLS} \
 		/usr/local/bin/execute_with_credentials.sh cleanup_environment
 
-# Execute integration tests within the docker container
 .PHONY: docker_test_integration
 docker_test_integration:
 	docker run --rm -it \
 		-e SERVICE_ACCOUNT_JSON \
+		-e TF_VAR_project_id \
+		-e TF_VAR_connector_id \
 		-v "$(CURDIR)":/workspace \
 		$(REGISTRY_URL)/${DOCKER_IMAGE_DEVELOPER_TOOLS}:${DOCKER_TAG_VERSION_DEVELOPER_TOOLS} \
-		/usr/local/bin/test_integration.sh
+		/usr/local/bin/execute_with_credentials.sh /bin/bash -c "cd test/integration && cft test run all"
+
 
 # Execute lint tests within the docker container
 .PHONY: docker_test_lint

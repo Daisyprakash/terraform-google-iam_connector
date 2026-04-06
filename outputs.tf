@@ -19,7 +19,7 @@ output "connector" {
   description = "The created IAM connector."
 }
 
-output "id" {
+output "connector_id" {
   description = "The ID of the created IAM connector."
   value       = google_iam_connectors_connector.default.id
 }
